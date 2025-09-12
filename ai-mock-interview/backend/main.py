@@ -2,6 +2,7 @@ import os
 import secrets
 from datetime import datetime, timedelta
 from typing import Optional
+from fastapi.middleware.cors import CORSMiddleware
 
 from fastapi import FastAPI, HTTPException, status, Depends
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
