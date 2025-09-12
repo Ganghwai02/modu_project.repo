@@ -1,12 +1,19 @@
-from fastapi import FastAPI, HTTPException  
-from pydantic import BaseModel  
-import httpx 
-from typing import List, Dict 
+import os
+import secrets
+from datetime import datetime, timedelta
+from typing import Optional
+
+from fastapi import FastAPI, HTTPException, status, Depends
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel, EmailStr
+from sqlalchemy import create_engine, Column, Integer, String, DateTime, ForeignKey
+from sqlalchemy.orm import sessionmaker, relationship, Session
+from sqlalchemy.ext.declarative import declarative_base
+from passlib.context import CryptContext
 
 
-# main.py
-from fastapi import FastAPI
+
 
 # FastAPI 애플리케이션 인스턴스 생성
 app = FastAPI()
@@ -25,9 +32,21 @@ app.add_middleware(
 )
 
 
+SECRET_KEY = secrets.token_urlsafe(32)
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/auth/token")
+
+
 
 
 # 기본 API 엔드포인트
 @app.get("/")
 def read_root():
     return {"Hello": "World"}
+
+
+@app.post("/api/auth/register")
+def register_user(user_data: dict):
+    return {"message": "User registered successfully!"}
