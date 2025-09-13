@@ -124,6 +124,3 @@
 # 와이어 프레임 (아직 초안)
 
 ![Image](https://github.com/user-attachments/assets/7e1ae888-6ec0-4f2a-b88e-5227bf695f99)
-
-# 📁 폴더 구조
-<img width="303" height="408" alt="Image" src="https://github.com/user-attachments/assets/1c1242ed-4e76-4bad-9807-73af8bdc5d3a" />
